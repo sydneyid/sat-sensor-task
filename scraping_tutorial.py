@@ -13,27 +13,20 @@ from bs4 import BeautifulSoup
 import csv
 import pandas as pd
 import warnings
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+# from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
 import time
 
 warnings.filterwarnings('ignore')
 
 
-# url = "https://in-the-sky.org/satpasses.php?day=6&month=5&year=2023&mag=500&anysat=v0&group=1&s=&gs=gs"
 
-url = "https://in-the-sky.org/satpasses.php?day=6&month=5&year=2023&mag=4&anysat=v0&group=1&s=&gs=gs"
+with open('KwajaleinAtoll.txt', 'r') as file:
+    data = file.read().replace('\n', '')
 
-# initiating the webdriver. Parameter includes the path of the webdriver.
-driver = webdriver.Safari()
-driver.get(url) 
-# this is just to ensure that the page is loaded
-time.sleep(5) 
-  
-html = driver.page_source
+html = data
 
 soup2 = BeautifulSoup(html, 'html.parser')
-driver.close()
 
 
 
@@ -81,4 +74,4 @@ for row in table.tbody.find_all('tr'):
     #     break
 
 
-df.to_csv('ListOfSatellitesFinal.csv', encoding='utf-8', index=False)
+df.to_csv('KwajaleinAtoll.csv', encoding='utf-8', index=False)
